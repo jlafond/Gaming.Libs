@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gaming.Libs.Core.Enums;
+using System;
 
 namespace Gaming.Libs.Core
 {
@@ -22,21 +23,30 @@ namespace Gaming.Libs.Core
             Name = name;
         }
 
-        public void AddWin()
+        public void IncrementFromOutcome(GameOutcome outcome)
+        {
+            switch (outcome)
+            {
+                case GameOutcome.Win: AddWin(); break;
+                case GameOutcome.Lose: AddLoss(); break;
+                case GameOutcome.Draw: AddDraw(); break;
+            }
+        }
+        public string Record => $"{Wins}-{Losses}-{Draws}";
+
+        #region private methods
+        private void AddWin()
         {
             Wins += 1;
         }
-        public void AddLoss()
+        private void AddLoss()
         {
             Losses += 1;
         }
-        public void AddDraw()
+        private void AddDraw()
         {
             Draws += 1;
         }
-        public string Record()
-        {
-            return $"{Wins}-{Losses}-{Draws}";
-        }
+        #endregion
     }
 }
